@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mamaas Girls Hostel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-glow: rgba(59, 130, 246, 0.3);
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.2);
+      --rose: #ef4444;
+      --rose-glow: rgba(239, 68, 68, 0.2);
+      --amber: #f59e0b;
+      --violet: #8b5cf6;
+      --indigo: #6366f1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      perspective: 1000px;
+    }
+
+    /* Premium Card Design with Glassmorphism */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    h2.brand-title {
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    p.brand-subtitle {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    /* Inputs & Form styling */
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      color: var(--text-sub);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-control {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      color: var(--text-main);
+      font-family: inherit;
+      transition: all 0.3s;
+      outline: none;
+    }
+
+    .input-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    /* Button */
+    .btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 8px 20px var(--primary-glow);
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      background: #475569;
+      color: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Tab Layout */
+    .tabs {
+      display: flex;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 24px;
+      border: 1px solid var(--card-border);
+    }
+
+    .tab-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-sub);
+      padding: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Views */
+    .view {
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Welcome header */
+    .tenant-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 16px;
+    }
+
+    .tenant-info h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .tenant-info p {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 1px solid var(--rose);
+      color: var(--rose);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: var(--rose);
+      color: white;
+      box-shadow: 0 4px 12px var(--rose-glow);
+    }
+
+    /* Total Dues Hero Card */
+    .dues-hero {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dues-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .dues-hero-label {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 500;
+    }
+
+    .dues-hero-amount {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 8px 0;
+    }
+
+    .dues-hero-status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .status-paid {
+      background: var(--emerald-glow);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-unpaid {
+      background: var(--rose-glow);
+      color: var(--rose);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .status-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    /* Grid of Dues */
+    .dues-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .due-card {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      transition: all 0.2s;
+    }
+
+    .due-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .due-label {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+
+    .due-amount {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .color-rent { color: var(--primary); }
+    .color-elec { color: var(--amber); }
+    .color-gas { color: var(--violet); }
+    .color-food { color: var(--indigo); }
+    .color-fine { color: var(--rose); }
+
+    /* Custom File Input */
+    .file-upload-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .file-upload-box {
+      border: 2px dashed var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.4);
+      transition: all 0.3s;
+    }
+
+    .file-upload-box:hover {
+      border-color: var(--primary);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .file-upload-box p {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      margin-top: 8px;
+    }
+
+    .file-upload-box span {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .file-hidden {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Ledger styles */
+    .ledger-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 350px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .ledger-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .ledger-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    .ledger-item {
+      background: rgba(15, 23, 42, 0.3);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ledger-meta h4 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    .ledger-meta p {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-top: 2px;
+    }
+
+    .ledger-amount-wrapper {
+      text-align: right;
+    }
+
+    .ledger-amount {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .ledger-amount.payment {
+      color: var(--emerald);
+    }
+
+    .ledger-amount.charge {
+      color: var(--rose);
+    }
+
+    .ledger-type-badge {
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 4px;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+
+    .badge-payment {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+    }
+
+    .badge-charge {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--rose);
+    }
+
+    .ledger-amount.pending {
+      color: var(--amber);
+    }
+
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--amber);
+    }
+
+    .no-data {
+      text-align: center;
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      padding: 24px 0;
+    }
+
+    /* Loaders */
+    .spinner {
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border-left-color: white;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #globalLoader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.8);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(8px);
+    }
+
+    #globalLoader p {
+      margin-top: 16px;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    /* Success Confetti View */
+    .success-view {
+      text-align: center;
+      animation: scaleUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes scaleUp {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      display: inline-block;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
+
+    .success-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--emerald);
+    }
+
+    .success-desc {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    /* Canvas for Confetti */
+    #confettiCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Electricity Breakdown Button */
+    .breakdown-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      padding: 6px 12px;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+      color: var(--amber);
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .breakdown-btn:hover {
+      background: rgba(245, 158, 11, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .breakdown-btn .arrow {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .breakdown-btn .arrow.open {
+      transform: rotate(180deg);
+    }
+
+    /* Electricity Breakdown Accordion Panel */
+    .elec-breakdown-panel {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 24px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.3s ease;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    .elec-breakdown-panel.open {
+      max-height: 500px;
+      opacity: 1;
+      padding: 16px;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.85rem;
+    }
+
+    .breakdown-row:last-child {
+      border-bottom: none;
+    }
+
+    .breakdown-row .label {
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .breakdown-row .value {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .breakdown-formula {
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 10px;
+      padding: 12px;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      line-height: 1.6;
+    }
+
+    .breakdown-formula .highlight {
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    /* Bank Transfer Information Card */
+    .bank-info-card {
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .bank-info-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bank-detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.85rem;
+    }
+
+    .bank-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .bank-detail-row .bank-label {
+      color: var(--text-sub);
+      font-weight: 500;
+    }
+
+    .bank-detail-row .bank-value {
+      color: var(--text-main);
+      font-weight: 600;
+      text-align: right;
+      word-break: break-all;
+      max-width: 55%;
+    }
+
+    .copy-btn {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 6px;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: rgba(59, 130, 246, 0.25);
+    }
+
+    .copy-btn.copied {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: var(--emerald);
+    }
+
+    .bank-placeholder {
+      color: var(--text-sub);
+      font-size: 0.85rem;
+      font-style: italic;
+      text-align: center;
+      padding: 12px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Global Fullscreen Loader -->
+  <div id="globalLoader" class="hidden">
+    <div class="spinner" style="width: 40px; height: 40px;"></div>
+    <p id="loaderText">Loading...</p>
+  </div>
+
+  <div class="container">
+    <!-- Confetti canvas container -->
+    <canvas id="confettiCanvas" class="hidden"></canvas>
+
+    <!-- LOGIN CARD -->
+    <div id="loginCard" class="glass-card view">
+      <h2 class="brand-title">Mamaas Girls Hostel</h2>
+      <p class="brand-subtitle">Enter credentials to view bills & dues</p>
+      
+      <div id="loginError" class="no-data hidden" style="color: var(--rose); margin-bottom: 16px; padding: 0;">
+        Invalid credentials. Please try again.
+      </div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" class="input-control" placeholder="e.g. ahmed123" required autocomplete="username">
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="input-control" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn" style="margin-top: 12px;">Login Securely</button>
+      </form>
+    </div>
+
+    <!-- MAIN PORTAL DASHBOARD CARD (HIDDEN BY DEFAULT) -->
+    <div id="dashboardCard" class="glass-card view hidden">
+      <!-- Tenant Header -->
+      <div class="tenant-header">
+        <div class="tenant-info">
+          <h3 id="tenantNameDisp">...</h3>
+          <p id="tenantRoomDisp">Room: ...</p>
+        </div>
+        <button onclick="handleLogout()" class="logout-btn">Log Out</button>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="tabs">
+        <button onclick="switchView('overview')" id="tab-overview" class="tab-btn active">Overview</button>
+        <button onclick="switchView('payment')" id="tab-payment" class="tab-btn">Submit Payment</button>
+        <button onclick="switchView('history')" id="tab-history" class="tab-btn">History</button>
+      </div>
+
+      <!-- OVERVIEW VIEW -->
+      <div id="view-overview" class="tab-content view">
+        <!-- Hero Outstanding Card -->
+        <div class="dues-hero">
+          <span class="dues-hero-label">Total Outstanding</span>
+          <div class="dues-hero-amount" id="totalDuesDisp">PKR 0.00</div>
+          <span id="duesStatusBadge" class="dues-hero-status status-paid">Paid</span>
+        </div>
+
+        <!-- Breakdown Grid -->
+        <div class="dues-grid">
+          <div class="due-card">
+            <span class="due-label">Rent Amount</span>
+            <div class="due-amount color-rent" id="rentDueDisp">PKR 0.00</div>
+          </div>
+          <div class="due-card">
+            <span class="due-label">Electricity</span>
+            <div class="due-amount color-elec" id="elecDueDisp">PKR 0.00</div>
+            <button class="breakdown-btn" id="elecBreakdownBtn" onclick="toggleElecBreakdown()">
+              <span>View Room Breakdown</span>
+              <span class="arrow" id="breakdownArrow">&#9660;</span>
+            </button>
+          </div>
+          <div class="due-card">
+            <span class="due-label">Gas Bill</span>
+            <div class="due-amount color-gas" id="gasDueDisp">PKR 0.00</div>
+          </div>
+          <div class="due-card">
+            <span class="due-label">Food Mess</span>
+            <div class="due-amount color-food" id="foodDueDisp">PKR 0.00</div>
+          </div>
+        </div>
+
+        <!-- Electricity Breakdown Accordion Panel -->
+        <div class="elec-breakdown-panel" id="elecBreakdownPanel">
+          <div class="breakdown-row">
+            <span class="label">&#9889; Room Meter</span>
+            <span class="value" id="roomMeterDisp">0 &rarr; 0</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="label">&#128202; Room Usage</span>
+            <span class="value" id="roomUsageDisp">0 units</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="label">&#128101; Roommates Shared</span>
+            <span class="value" id="roommateCountDisp">0</span>
+          </div>
+          <div class="breakdown-formula" id="breakdownFormula">
+            ( <span class="highlight" id="formulaUnits">0</span> units / <span class="highlight" id="formulaRoommates">0</span> tenants ) &times; <span class="highlight" id="formulaRate">0.00</span> PKR = <span class="highlight" id="formulaShare">0.00</span> PKR
+          </div>
+        </div>
+
+        <div class="due-card" style="width: 100%; margin-bottom: 24px;">
+          <span class="due-label">Fines & Penalties</span>
+          <div class="due-amount color-fine" id="fineDueDisp">PKR 0.00</div>
+        </div>
+
+        <button id="payDuesBtn" onclick="switchView('payment')" class="btn">Pay Dues Now</button>
+      </div>
+
+      <!-- PAYMENT VIEW -->
+      <div id="view-payment" class="tab-content view hidden">
+        <!-- Bank Transfer Information Card -->
+        <div class="bank-info-card" id="bankInfoCard">
+          <h4>&#127974; Bank Transfer Details</h4>
+          <div id="bankDetailsContainer">
+            <div class="bank-detail-row">
+              <span class="bank-label">Bank Name</span>
+              <span class="bank-value" id="bankNameDisp">---</span>
+            </div>
+            <div class="bank-detail-row">
+              <span class="bank-label">Account Title</span>
+              <span class="bank-value" id="bankTitleDisp">---</span>
+            </div>
+            <div class="bank-detail-row">
+              <span class="bank-label">Account Number</span>
+              <span class="bank-value" id="bankNumDisp">--- <button class="copy-btn" id="copyBankNumBtn" onclick="copyToClipboard('bankNumDisp')">Copy</button></span>
+            </div>
+            <div class="bank-detail-row">
+              <span class="bank-label">IBAN</span>
+              <span class="bank-value" id="bankIbanDisp">--- <button class="copy-btn" id="copyBankIbanBtn" onclick="copyToClipboard('bankIbanDisp')">Copy</button></span>
+            </div>
+          </div>
+          <div class="bank-placeholder hidden" id="bankPlaceholder">No bank transfer information configured yet. Please contact the hostel administration for payment details.</div>
+        </div>
+
+        <form id="paymentForm" onsubmit="handlePaymentSubmit(event)">
+          <div class="input-group">
+            <label for="subCategoryDisplay">Payment For</label>
+            <input type="text" id="subCategoryDisplay" class="input-control" value="Total Outstanding" readonly style="cursor: not-allowed; background: rgba(15, 23, 42, 0.3); opacity: 0.85;">
+            <input type="hidden" name="subCategory" id="subCategory" value="Total Dues">
+          </div>
+
+          <div class="input-group">
+            <label for="amount">Amount (PKR)</label>
+            <input type="number" name="amount" id="amount" class="input-control" placeholder="e.g. 5000" min="1" required style="font-weight:600; color: var(--primary);">
+          </div>
+
+          <div class="input-group">
+            <label for="mobile">Your Mobile Number</label>
+            <input type="tel" name="mobile" id="mobile" class="input-control" placeholder="e.g. 03XXXXXXXXX" required>
+          </div>
+
+          <!-- Custom Receipt Uploader -->
+          <div class="input-group">
+            <label>Upload Receipt Proof (Image/PDF)</label>
+            <div class="file-upload-wrapper">
+              <div class="file-upload-box" id="fileUploadBox">
+                <p id="fileUploadText">Click or Drag & Drop receipt here</p>
+                <span id="fileUploadSubtext">PNG, JPG, JPEG or PDF</span>
+              </div>
+              <input type="file" id="proofFile" name="proofFile" class="file-hidden" accept="image/*,application/pdf" onchange="handleFileChange(this)" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="note">Note (Optional)</label>
+            <input type="text" name="note" id="note" class="input-control" placeholder="e.g. Rent payment May 2026">
+          </div>
+
+          <!-- Hidden credentials passed automatically -->
+          <input type="hidden" name="tenantId" id="tenantId">
+          <input type="hidden" name="tenantName" id="tenantName">
+
+          <button type="submit" class="btn">Submit Receipt for Approval</button>
+        </form>
+      </div>
+
+      <!-- LEDGER/HISTORY VIEW -->
+      <div id="view-history" class="tab-content view hidden">
+        <h3 style="font-size: 1rem; margin-bottom: 12px; font-weight:600; color:var(--text-sub); text-transform:uppercase;">Recent History (90 Days)</h3>
+        <div id="ledgerContainer" class="ledger-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SUCCESS SCREEN -->
+    <div id="successCard" class="glass-card view hidden">
+      <div class="success-view">
+        <span class="success-icon">🎉</span>
+        <h3 class="success-title">Receipt Submitted</h3>
+        <p class="success-desc">Your receipt has been successfully uploaded and is waiting for approval by the owner.</p>
+        <button onclick="resetPortal()" class="btn" style="background:transparent; border: 1px solid var(--card-border); color:var(--text-main);">Back to Dashboard</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // State storage
+    let activeTenant = null;
+    let transactionsList = [];
+
+    // Unified function to call backend via direct CORS fetch (bypassing google.script.run to prevent cookie blocks on mobile)
+    function callBackend(action, data, successCb, failureCb) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const backendUrl = urlParams.get('backend') || "https://script.google.com/macros/s/AKfycbxXw9uWwin9dZCvAaRLpe251lLI5mLa-IlHAwnuFLBWg2Ut0j-vUd2pF4IE71HmmPm2/exec";
+      
+      if (!backendUrl) {
+        failureCb("Backend URL not found.");
+        return;
+      }
+      
+      fetch(backendUrl, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify({
+          action: action,
+          ...data
+        })
+      })
+      .then(function(response) {
+        if (!response.ok) {
+          throw new Error('Server error: ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(function(json) {
+        successCb(json);
+      })
+      .catch(function(err) {
+        failureCb(err.message || err);
+      });
+    }
+
+    // Helper to format currency
+    function formatCurrency(val) {
+      return "PKR " + parseFloat(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Toggle screen loaders
+    function showLoader(text) {
+      document.getElementById('loaderText').innerText = text || "Processing...";
+      document.getElementById('globalLoader').classList.remove('hidden');
+    }
+
+    function hideLoader() {
+      document.getElementById('globalLoader').classList.add('hidden');
+    }
+
+    // Tab switching
+    function switchView(viewName) {
+      // Hide all contents
+      document.querySelectorAll('.tab-content').forEach(view => view.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      // Show selected content
+      document.getElementById('view-' + viewName).classList.remove('hidden');
+      document.getElementById('tab-' + viewName).classList.add('active');
+
+      if (viewName === 'history') {
+        loadHistory();
+      }
+    }
+
+    // Handle Login Submit
+    function handleLogin(e) {
+      e.preventDefault();
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value;
+      
+      showLoader("Verifying credentials...");
+      
+      callBackend('verifyLogin', { username: user, password: pass }, function(response) {
+        hideLoader();
+        if (response && response.success) {
+          activeTenant = response.tenant;
+          window.bankName = response.bankName || "";
+          window.bankTitle = response.bankTitle || "";
+          window.bankNum = response.bankNum || "";
+          window.bankIban = response.bankIban || "";
+          document.getElementById('loginCard').classList.add('hidden');
+          document.getElementById('dashboardCard').classList.remove('hidden');
+          populateDashboard();
+        } else {
+          const errDiv = document.getElementById('loginError');
+          errDiv.innerText = response ? response.message : "Invalid credentials.";
+          errDiv.classList.remove('hidden');
+        }
+      }, function(err) {
+        hideLoader();
+        alert("Connection error. Please try again: " + err);
+      });
+    }
+
+    // Populate Dashboard Data
+    function populateDashboard() {
+      if (!activeTenant) return;
+      
+      document.getElementById('tenantNameDisp').innerText = activeTenant.name;
+      document.getElementById('tenantRoomDisp').innerText = "Room: " + (activeTenant.room || "N/A") + " (" + (activeTenant.branch || "Main Branch") + ")";
+      
+      // Totals
+      document.getElementById('totalDuesDisp').innerText = formatCurrency(activeTenant.totalDues);
+      
+      const badge = document.getElementById('duesStatusBadge');
+      if (activeTenant.hasPendingApproval) {
+        badge.innerText = "Pending Approval";
+        badge.className = "dues-hero-status status-pending";
+      } else if (activeTenant.totalDues <= 0) {
+        badge.innerText = "Paid";
+        badge.className = "dues-hero-status status-paid";
+      } else {
+        badge.innerText = "Unpaid";
+        badge.className = "dues-hero-status status-unpaid";
+      }
+
+      // Hide/Show payment button and tab depending on outstanding dues and pending status
+      const payBtn = document.getElementById('payDuesBtn');
+      const tabPay = document.getElementById('tab-payment');
+      if (activeTenant.hasPendingApproval || activeTenant.totalDues <= 0) {
+        if (payBtn) payBtn.classList.add('hidden');
+        if (tabPay) tabPay.classList.add('hidden');
+      } else {
+        if (payBtn) payBtn.classList.remove('hidden');
+        if (tabPay) tabPay.classList.remove('hidden');
+      }
+
+      // Breakdown
+      document.getElementById('rentDueDisp').innerText = formatCurrency(activeTenant.rent);
+      document.getElementById('elecDueDisp').innerText = formatCurrency(activeTenant.electricity);
+      document.getElementById('gasDueDisp').innerText = formatCurrency(activeTenant.gas);
+      document.getElementById('foodDueDisp').innerText = formatCurrency(activeTenant.food);
+      document.getElementById('fineDueDisp').innerText = formatCurrency(activeTenant.fine);
+
+      // Populate Electricity Room Breakdown
+      var startReading = activeTenant.roomStartingReading || 0;
+      var lastReading = activeTenant.roomLastReading || 0;
+      var units = activeTenant.roomUnitsConsumed || 0;
+      var roommates = activeTenant.roommateCount || 0;
+      var rate = activeTenant.electricityRate || 20.0;
+
+      document.getElementById('roomMeterDisp').innerHTML = startReading + ' &rarr; ' + lastReading;
+      document.getElementById('roomUsageDisp').innerText = units + ' units';
+      document.getElementById('roommateCountDisp').innerText = roommates;
+
+      var safeRoommates = Math.max(roommates, 1);
+      var share = (units / safeRoommates) * rate;
+      document.getElementById('formulaUnits').innerText = units;
+      document.getElementById('formulaRoommates').innerText = roommates;
+      document.getElementById('formulaRate').innerText = rate.toFixed(2);
+      document.getElementById('formulaShare').innerText = share.toFixed(2);
+
+      // Populate Bank Transfer Details
+      var bankName = activeTenant.bankName || window.bankName || "";
+      var bankTitle = activeTenant.bankTitle || window.bankTitle || "";
+      var bankNum = activeTenant.bankNum || window.bankNum || "";
+      var bankIban = activeTenant.bankIban || window.bankIban || "";
+
+      if (bankName || bankTitle || bankNum || bankIban) {
+        document.getElementById('bankNameDisp').innerText = bankName || '---';
+        document.getElementById('bankTitleDisp').innerText = bankTitle || '---';
+        document.getElementById('bankNumDisp').innerHTML = (bankNum || '---') + ' <button class="copy-btn" id="copyBankNumBtn" onclick="copyToClipboard(\'bankNumDisp\')">Copy</button>';
+        document.getElementById('bankIbanDisp').innerHTML = (bankIban || '---') + ' <button class="copy-btn" id="copyBankIbanBtn" onclick="copyToClipboard(\'bankIbanDisp\')">Copy</button>';
+        document.getElementById('bankDetailsContainer').classList.remove('hidden');
+        document.getElementById('bankPlaceholder').classList.add('hidden');
+      } else {
+        document.getElementById('bankDetailsContainer').classList.add('hidden');
+        document.getElementById('bankPlaceholder').classList.remove('hidden');
+      }
+
+      // Reset breakdown panel to closed state on each populate
+      var panel = document.getElementById('elecBreakdownPanel');
+      var arrow = document.getElementById('breakdownArrow');
+      panel.classList.remove('open');
+      if (arrow) arrow.classList.remove('open');
+
+      // Setup Payment form hidden fields
+      document.getElementById('tenantId').value = activeTenant.id;
+      document.getElementById('tenantName').value = activeTenant.name;
+      document.getElementById('mobile').value = activeTenant.mobile;
+
+      // Auto-fill dues amount initially based on category
+      autoFillDuesAmount();
+      
+      // Default to overview tab
+      switchView('overview');
+    }
+
+    // Auto-fill Dues Amount based on dropdown selection
+    function autoFillDuesAmount() {
+      if (!activeTenant) return;
+      const category = document.getElementById('subCategory').value;
+      const amtInput = document.getElementById('amount');
+      
+      let amount = 0;
+      switch (category) {
+        case "Rent": amount = activeTenant.rent; break;
+        case "Electricity": amount = activeTenant.electricity; break;
+        case "Gas Bill": amount = activeTenant.gas; break;
+        case "Food Mess": amount = activeTenant.food; break;
+        case "Fines": amount = activeTenant.fine; break;
+        case "Total Dues": amount = activeTenant.totalDues; break;
+      }
+      amtInput.value = amount > 0 ? Math.round(amount) : "";
+    }
+
+    // Handle File upload change UI feedback
+    function handleFileChange(input) {
+      const uploadBox = document.getElementById('fileUploadBox');
+      const text = document.getElementById('fileUploadText');
+      
+      if (input.files && input.files.length > 0) {
+        const file = input.files[0];
+        text.innerText = file.name;
+        uploadBox.style.borderColor = "var(--emerald)";
+        uploadBox.style.background = "rgba(16, 185, 129, 0.03)";
+      } else {
+        text.innerText = "Click or Drag & Drop receipt here";
+        uploadBox.style.borderColor = "var(--card-border)";
+        uploadBox.style.background = "rgba(15, 23, 42, 0.4)";
+      }
+    }
+
+    // Load History list from server
+    function loadHistory() {
+      if (!activeTenant) return;
+      
+      const container = document.getElementById('ledgerContainer');
+      container.innerHTML = '<div style="text-align:center; padding: 24px;" class="spinner"></div>';
+      
+      callBackend('getTransactions', { tenantId: activeTenant.id, tenantName: activeTenant.name }, function(txns) {
+        transactionsList = txns || [];
+        container.innerHTML = '';
+        
+        if (transactionsList.length === 0) {
+          container.innerHTML = '<div class="no-data">No transactions recorded in the last 90 days.</div>';
+          return;
+        }
+        
+        transactionsList.forEach(t => {
+          const item = document.createElement('div');
+          item.className = 'ledger-item';
+          
+          const isPending = t.status === 'Pending';
+          const isIncome = t.type.toUpperCase() === 'INCOME';
+          
+          let displayType = isIncome ? 'Payment' : 'Charge';
+          let valSign = isIncome ? '+' : '-';
+          let valClass = isIncome ? 'payment' : 'charge';
+          let badgeClass = isIncome ? 'badge-payment' : 'badge-charge';
+          
+          if (isPending) {
+            displayType = 'Pending Approval';
+            valSign = '+';
+            valClass = 'pending';
+            badgeClass = 'badge-pending';
+          }
+          
+          const categoryName = t.subCategory || t.category;
+          
+          item.innerHTML = `
+            <div class="ledger-meta">
+              <h4>` + categoryName + `</h4>
+              <p>` + t.date + ` ` + (t.note ? '• ' + t.note : '') + `</p>
+            </div>
+            <div class="ledger-amount-wrapper">
+              <span class="ledger-amount ` + valClass + `">` + valSign + ` ` + Math.round(t.amount).toLocaleString() + `</span>
+              <div>
+                <span class="ledger-type-badge ` + badgeClass + `">` + displayType + `</span>
+              </div>
+            </div>
+          `;
+          container.appendChild(item);
+        });
+      }, function(err) {
+        container.innerHTML = '<div class="no-data" style="color: var(--rose);">Error loading ledger history.</div>';
+      });
+    }
+
+    // Submit payment form
+    function handlePaymentSubmit(e) {
+      e.preventDefault();
+      
+      const fileInput = document.getElementById('proofFile');
+      
+      if (!fileInput.files || fileInput.files.length === 0) {
+        alert("Please upload a receipt copy as proof.");
+        return;
+      }
+      
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      
+      showLoader("Reading receipt proof file...");
+      
+      reader.onload = function(evt) {
+        showLoader("Uploading receipt and submitting payment details...");
+        
+        const base64Data = evt.target.result.split(',')[1];
+        
+        const payload = {
+          amount: document.getElementById('amount').value,
+          tenantId: document.getElementById('tenantId').value,
+          tenantName: document.getElementById('tenantName').value,
+          mobile: document.getElementById('mobile').value,
+          note: document.getElementById('note').value,
+          subCategory: document.getElementById('subCategory').value,
+          fileData: base64Data,
+          fileName: file.name,
+          fileType: file.type
+        };
+        
+        callBackend('processForm', { payload: payload }, function(res) {
+          hideLoader();
+          if (res && res.success) {
+            if (activeTenant) {
+              activeTenant.hasPendingApproval = true;
+            }
+            document.getElementById('dashboardCard').classList.add('hidden');
+            document.getElementById('successCard').classList.remove('hidden');
+            triggerConfetti();
+          } else {
+            alert("Submission error. Please try again.");
+          }
+        }, function(err) {
+          hideLoader();
+          alert("Submission failed: " + err);
+        });
+      };
+      
+      reader.onerror = function() {
+        hideLoader();
+        alert("Error reading the receipt file. Please try again.");
+      };
+      
+      reader.readAsDataURL(file);
+    }
+
+    // Reset Portal after success submission
+    function resetPortal() {
+      // Clear payment form fields
+      document.getElementById('paymentForm').reset();
+      handleFileChange(document.getElementById('proofFile'));
+      
+      // Update tenant dues object to show pending status immediately
+      if (activeTenant) {
+        activeTenant.hasPendingApproval = true;
+        populateDashboard();
+      }
+      
+      document.getElementById('successCard').classList.add('hidden');
+      document.getElementById('dashboardCard').classList.remove('hidden');
+      
+      switchView('overview');
+    }
+
+    // Handle logout
+    function handleLogout() {
+      activeTenant = null;
+      transactionsList = [];
+      document.getElementById('loginForm').reset();
+      document.getElementById('loginError').classList.add('hidden');
+      document.getElementById('dashboardCard').classList.add('hidden');
+      document.getElementById('loginCard').classList.remove('hidden');
+    }
+
+    // Simple confetti effect using JavaScript canvas
+    function triggerConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      canvas.classList.remove('hidden');
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+      const ctx = canvas.getContext('2d');
+      
+      const colors = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444'];
+      const particles = [];
+      
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 2 + 50,
+          vx: (Math.random() - 0.5) * 8,
+          vy: (Math.random() - 0.7) * 12 - 4,
+          r: Math.random() * 6 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          opacity: 1,
+          decay: Math.random() * 0.02 + 0.015
+        });
+      }
+      
+      function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = false;
+        
+        particles.forEach(p => {
+          if (p.opacity > 0) {
+            active = true;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.2; // gravity
+            p.opacity -= p.decay;
+            
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.opacity;
+            ctx.fill();
+          }
+        });
+        
+        if (active) {
+          requestAnimationFrame(update);
+        } else {
+          canvas.classList.add('hidden');
+        }
+      }
+      
+      update();
+    }
+
+    // Toggle Electricity Breakdown Accordion
+    function toggleElecBreakdown() {
+      var panel = document.getElementById('elecBreakdownPanel');
+      var arrow = document.getElementById('breakdownArrow');
+      if (panel.classList.contains('open')) {
+        panel.classList.remove('open');
+        if (arrow) arrow.classList.remove('open');
+      } else {
+        panel.classList.add('open');
+        if (arrow) arrow.classList.add('open');
+      }
+    }
+
+    // Copy to Clipboard with visual feedback
+    function copyToClipboard(elementId) {
+      var element = document.getElementById(elementId);
+      if (!element) return;
+      var text = element.childNodes[0] ? element.childNodes[0].textContent.trim() : element.innerText.trim();
+      if (text === '---' || !text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          showCopyFeedback(elementId);
+        }).catch(function() {
+          fallbackCopy(text, elementId);
+        });
+      } else {
+        fallbackCopy(text, elementId);
+      }
+    }
+
+    function fallbackCopy(text, elementId) {
+      var textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showCopyFeedback(elementId);
+      } catch (e) {}
+      document.body.removeChild(textarea);
+    }
+
+    function showCopyFeedback(elementId) {
+      var btnMap = {
+        'bankNumDisp': 'copyBankNumBtn',
+        'bankIbanDisp': 'copyBankIbanBtn'
+      };
+      var btnId = btnMap[elementId];
+      if (!btnId) return;
+      var btn = document.getElementById(btnId);
+      if (!btn) return;
+      btn.innerText = 'Copied! \u2705';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.innerText = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
