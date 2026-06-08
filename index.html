@@ -1054,6 +1054,12 @@
       if (activeTenant.hasPendingApproval) {
         badge.innerText = "Pending Approval";
         badge.className = "dues-hero-status status-pending";
+      } else if (activeTenant.status && activeTenant.status.toLowerCase() === 'unpaid') {
+        badge.innerText = "Unpaid";
+        badge.className = "dues-hero-status status-unpaid";
+      } else if (activeTenant.status && activeTenant.status.toLowerCase() === 'paid') {
+        badge.innerText = "Paid";
+        badge.className = "dues-hero-status status-paid";
       } else if (activeTenant.totalDues <= 0) {
         badge.innerText = "Paid";
         badge.className = "dues-hero-status status-paid";
