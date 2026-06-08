@@ -1,2 +1,2 @@
-# mghportal
+# MGHPORTAL
 Mamaas Girls Hostel Portal
