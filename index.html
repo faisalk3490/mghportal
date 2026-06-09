@@ -1261,7 +1261,15 @@
           subCategory: document.getElementById('subCategory').value,
           fileData: base64Data,
           fileName: file.name,
-          fileType: file.type
+          fileType: file.type,
+          rent: activeTenant ? activeTenant.rent : 0,
+          electricity: activeTenant ? activeTenant.electricity : 0,
+          gas: activeTenant ? activeTenant.gas : 0,
+          food: activeTenant ? activeTenant.food : 0,
+          fine: activeTenant ? activeTenant.fine : 0,
+          branchName: activeTenant ? activeTenant.branch : "",
+          roomNumber: activeTenant ? activeTenant.roomNumber : "",
+          seatNumber: activeTenant ? activeTenant.seatNumber : ""
         };
         
         callBackend('processForm', { payload: payload }, function(res) {
