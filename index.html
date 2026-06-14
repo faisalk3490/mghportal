@@ -948,7 +948,7 @@
     // Unified function to call backend via direct CORS fetch (bypassing google.script.run to prevent cookie blocks on mobile)
     function callBackend(action, data, successCb, failureCb) {
       const urlParams = new URLSearchParams(window.location.search);
-      const backendUrl = urlParams.get('backend') || "https://script.google.com/macros/s/AKfycbyo8QjoSTiLwH2wcoZk3gZic2TFpw5fLYWMvh-pmzIsG-F57z8ONxJ7H6ytVohn5-Kp/exec";
+      const backendUrl = urlParams.get('backend') || "https://script.google.com/macros/s/AKfycbxXw9uWwin9dZCvAaRLpe251lLI5mLa-IlHAwnuFLBWg2Ut0j-vUd2pF4IE71HmmPm2/exec";
       
       if (!backendUrl) {
         failureCb("Backend URL not found.");
